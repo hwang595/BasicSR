@@ -75,7 +75,7 @@ class LowrankResidualDenseBlock(nn.Module):
 
         #self.conv5 = nn.Conv2d(num_feat + 4 * num_grow_ch, num_feat, 3, 1, 1)
         self.conv5_u = nn.Conv2d(num_feat + 4 * num_grow_ch, int(num_feat/4), 3, 1, 1)
-        self.conv5_u = nn.Conv2d(int(num_feat/4), num_feat, 1, 1)
+        self.conv5_v = nn.Conv2d(int(num_feat/4), num_feat, 1, 1)
 
         self.lrelu = nn.LeakyReLU(negative_slope=0.2, inplace=True)
 
