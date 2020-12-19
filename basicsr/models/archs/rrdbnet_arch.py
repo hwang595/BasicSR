@@ -2,7 +2,7 @@ import torch
 from torch import nn as nn
 from torch.nn import functional as F
 
-from basicsr.models.archs.arch_util import default_init_weights, make_layer
+from basicsr.models.archs.arch_util import default_init_weights, make_layer, make_hybrid_layer
 
 
 class ResidualDenseBlock(nn.Module):
@@ -229,7 +229,7 @@ class LowrankRDBNet(nn.Module):
                 1,
                 LowrankRRDB, 
                 num_feat=num_feat, num_grow_ch=num_grow_ch)
-                   
+
         self.conv_body = nn.Conv2d(num_feat, num_feat, 3, 1, 1)
         # upsample
         self.conv_up1 = nn.Conv2d(num_feat, num_feat, 3, 1, 1)
