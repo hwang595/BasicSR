@@ -219,8 +219,17 @@ class LowrankRDBNet(nn.Module):
                  num_grow_ch=32):
         super(LowrankRDBNet, self).__init__()
         self.conv_first = nn.Conv2d(num_in_ch, num_feat, 3, 1, 1)
-        self.body = make_layer(
-            LowrankRRDB, num_block, num_feat=num_feat, num_grow_ch=num_grow_ch)
+        #self.body = make_layer(
+        #    LowrankRRDB, num_block, num_feat=num_feat, num_grow_ch=num_grow_ch)
+        
+        # make_hybrid_layer(basic_block, num_total_block, num_basic_block, low_rank_block)
+        self.body = make_hybrid_layer(
+                RRDB, 
+                num_block, 
+                1,
+                LowrankRRDB, 
+                num_feat=num_feat, num_grow_ch=num_grow_ch)
+                   
         self.conv_body = nn.Conv2d(num_feat, num_feat, 3, 1, 1)
         # upsample
         self.conv_up1 = nn.Conv2d(num_feat, num_feat, 3, 1, 1)
